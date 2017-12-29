@@ -1,0 +1,5 @@
+bokeh
+ipywidgets
+matplotlib
+numpy
+requests
