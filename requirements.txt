@@ -1,5 +1,10 @@
 bokeh
+git+https://github.com/pymc-devs/pymc3
 ipywidgets
 matplotlib
 numpy
+pandas
 requests
+scikit-learn
+scipy
+seaborn
