@@ -3,4 +3,8 @@
 .ipython/
 .jupyter/
 .local/
-Untitled.ipynb
+.conda/
+.config/
+.npm/
+.yarnrc
+Untitled*.ipynb
