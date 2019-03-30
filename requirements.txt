@@ -1,9 +1,12 @@
 bokeh
 git+https://github.com/pymc-devs/pymc3
+ipysheet
 ipywidgets
 matplotlib
+mock
 numpy
 pandas
+qgrid
 requests
 scikit-learn
 scipy
