@@ -8,4 +8,5 @@
 .npm/
 .yarnrc
 Untitled*.ipynb
+unversioned/
 .bash_history
