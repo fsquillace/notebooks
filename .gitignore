@@ -10,3 +10,6 @@
 Untitled*.ipynb
 unversioned/
 .bash_history
+dist/
+build/
+*.egg-info/
