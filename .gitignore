@@ -13,3 +13,5 @@ unversioned/
 dist/
 build/
 *.egg-info/
+*.pyc
+__pycache__/
