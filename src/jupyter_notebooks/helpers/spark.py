@@ -66,3 +66,10 @@ def convert_to_df(values, attr_names=None):
     sc = SparkContext.getOrCreate()
     return sc.parallelize(values).map(_convert_to_row).toDF()
 
+
+def to_list_of_dict(data_frame):
+    """
+    Converts a spark data frame into a list of dict.
+    """
+    return data_frame.toPandas().to_dict(orient='records')
+

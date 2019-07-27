@@ -71,10 +71,20 @@ def pickle_it(obj, file_path):
     ----------
     obj : object
         Any python obj
-    filename: str
+    file_path: str
         The file path name
     """
-    pickle.dump(obj, open(file_path, 'w'))
+    pickle.dump(obj, open(file_path, 'wb'))
+
+
+def unpickle_it(file_path):
+    """
+    Parameters
+    ----------
+    file_path: str
+        The file path name
+    """
+    return pickle.load(open(file_path, 'rb'))
 
 
 def setup_logging(loglevel=logging.INFO):
