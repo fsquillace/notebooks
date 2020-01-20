@@ -49,18 +49,22 @@ import pickle
 import os
 import random
 import scipy as sp
-import seaborn as sns
+# This conflicts for some reason with joblib Parallel.
+# Disabling the import for seaborn
+# import seaborn as sns
 import sklearn
 import statsmodels.api as sm
 import sys
+import traceback
 
 pd.set_option('display.max_colwidth', -1)
 pd.set_option("display.max_rows", 120)
 pd.set_option("display.max_columns", 120)
+pd.set_option('display.float_format', lambda x: '%.3f' % x)
 
-sns.set_context("poster")
-sns.set(rc={'figure.figsize': (16, 9.)})
-sns.set_style("whitegrid")
+# sns.set_context("poster")
+# sns.set(rc={'figure.figsize': (16, 9.)})
+# sns.set_style("whitegrid")
 
 _logger = logging.getLogger(__name__)
 
@@ -105,3 +109,37 @@ def open_expand(file_path, *args, **kwargs):
     Allows to use '~' in file_path.
     """
     return open(os.path.expanduser(file_path), *args, **kwargs)
+
+
+def _exception_handler(error_type, error_value, error_traceback):
+    """Log all uncaught exceptions at runtime with sys.excepthook"""
+    logging.exception("Uncaught exception {} {}".format(
+        str(error_type), str(error_value)))
+    tb = traceback.format_exception(
+        error_type, error_value, error_traceback)
+    traceback_string = ''
+    for ln in tb:
+        traceback_string += ln
+    logging.exception(traceback_string)
+
+    
+def setup_logging(format=None, level=logging.INFO, handlers=None):
+    """
+    To log to a file instead of stdout:
+    
+    >>> setup_logging(handlers=[logging.FileHandler("myfile.log")])
+    """
+    if format is None:
+        format="%(asctime)s %(levelname)s %(message)s"
+        
+    if handlers is None:
+        handlers=[logging.StreamHandler()]
+        
+    # Use sys.excepthook to handle any uncaught exceptions
+    sys.excepthook = _exception_handler
+    
+    logging.basicConfig(
+        format=format,
+        level=level,
+        handlers=handlers,
+    )
